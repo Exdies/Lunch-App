@@ -24,7 +24,7 @@ export const CTA: React.FC = () => {
       queryClient.clear()
     }
 
-    return (
+    /*     return (
       <Box flexGrow={3} mx={2}>
         <Button
           width="100%"
@@ -34,11 +34,17 @@ export const CTA: React.FC = () => {
           {loading ? <Spinner /> : buttonText}
         </Button>
       </Box>
-    )
+    ) */
   }
 
+  const buttonRouteLogIn: Route = useMemo<Route>(() => {
+    if (router.route === '/') return { route: '/Login', text: 'Sign In' }
+
+    return { route: '/', text: 'Home' }
+  }, [router.route])
+
   const buttonRoute: Route = useMemo<Route>(() => {
-    if (router.route === '/') return { route: '/launches', text: 'Launches' }
+    if (router.route === '/') return { route: '/RegisterForm', text: 'Sign Up' }
 
     return { route: '/', text: 'Home' }
   }, [router.route])
@@ -52,14 +58,14 @@ export const CTA: React.FC = () => {
       maxWidth="48rem"
       py={2}>
       {renderAuthButton()}
+      <ChakraLink href={buttonRouteLogIn.route} flexGrow={1} mx={2}>
+        <Button width="100%" variant="solid" colorScheme="green">
+          {buttonRouteLogIn.text}
+        </Button>
+      </ChakraLink>
       <ChakraLink href={buttonRoute.route} flexGrow={1} mx={2}>
         <Button width="100%" variant="outline" colorScheme="green">
           {buttonRoute.text}
-        </Button>
-      </ChakraLink>
-      <ChakraLink href="/crud" flexGrow={1} mx={2}>
-        <Button width="100%" variant="outline" colorScheme="green">
-          CRUD
         </Button>
       </ChakraLink>
     </Container>
